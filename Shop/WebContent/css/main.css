@@ -1,0 +1,88 @@
+header{background-color: antiquewhite; padding: 20px 0;}
+.headerwrap{width: 1200px; overflow: hidden; font-size: 16px; margin: 0 auto;}
+header.active{position: fixed; top: 0;background-color: antiquewhite; padding: 20px 0; z-index: 9999; width: 100%;}
+nav.active{position: fixed; top: 60px; z-index: 999; background-color: #f1f1f1; width: 100%;}
+.left_header p {float: left; padding: 0 5px;}
+.right_header *{float: right; padding: 0 5px;}
+.right_header >input{width: 150px;}
+#title{text-align: center; font-size: 26px; letter-spacing: 5px; padding: 50px 0;}
+#gnb{border-bottom: 1px solid #eee; border-top: 1px solid #ddd;}
+.nav_wrap{width: 1300px; overflow: hidden; margin: 0 auto; font-size: 11px; line-height: 30px;}
+.category, .category_left_btn{float: left; padding: 0 15px; cursor: pointer;}
+.category_right_btn *{float: right; cursor: pointer;}
+.category_left_btn{width: 40px;height: 40px; cursor: pointer;}
+.category:hover{text-decoration: underline;}
+.cart:hover .fa-cart-arrow-down{color:#abf;}
+.wish:hover .fa-heart{color:#abf;}
+.line{height: 5px; width: 30px; background: #ddd; margin: 5px 0; border-radius: 20px;}
+
+
+.nav_wrap{line-height: 40px;}
+.fa-cart-arrow-down,.fa-heart{font-size: 24px; display: inline-block; margin: 10px;}
+.item_list{width: 1200px; margin: 0 auto;}
+.item .list{width: 120px;height: 30px; padding: 10px 0; background-color: #666;}
+.item .list a:hover{color: yellow;}
+.item {float: left; text-align: center; font-size: 12px; }
+.item > p > a{color: #fff; font-weight: lighter;}
+.item_list { opacity: 0;}
+.mainbackground .backgound_list{position: absolute;width: 100%;height: 750px;}
+.mainbackground .backgound_list:nth-child(1){
+    background-image: url(../images/shoppingmallback.jpg);
+    opacity: 0;
+}
+.mainbackground .backgound_list:nth-child(2){
+    background-image: url(../images/shoppingmallback2.jpg);
+    opacity: 0;
+}
+.mainbackground .backgound_list:nth-child(3){
+    background-image: url(../images/shoppingmallback3.jpg);
+    opacity: 0;
+}
+.mainbackground .backgound_list:nth-child(4){
+    background-image: url(../images/shoppingmallback4.jpg);
+    opacity: 0;
+}
+.mainbackground .backgound_list.active{opacity: 1;}
+.mainbackground{ width: 100%; height: 750px; position: relative; margin-top: 30px;}
+.indicator{width: 200px; height: 50px; position: absolute; bottom: 0px;  left: 50%; transform: translateX(-50%); cursor: pointer;bottom: 20px;}
+.indicator_list{width: 25px; height: 25px; border-radius: 50%; border: 1px solid #333; float:left; margin: 10px;}
+
+.indicator_list.active{background-color: #ddd;}
+.fa-arrow-left{font-size: 40px; position: absolute; display: inline-block; left: 30px; top: 50%; transform: translateY(-50%); color: #abc; cursor: pointer; padding: 10px;}
+.fa-arrow-right{font-size: 40px; position: absolute; display: inline-block; right: 30px; top: 50%; transform: translateY(-50%); color: #abc; cursor: pointer; padding: 10px;}
+
+.recommend{margin-top: 200px;}
+.recommend_wrap{width: 1500px; margin: 0 auto; overflow: hidden;}
+.recommend_item{float: left; margin: 0 40px; position: relative; margin-bottom: 40px; box-shadow: 0 0 3px 3px rgba(0,0,0,0.5);  box-sizing: border-box;}
+.recommend_item:first-child{margin-left: 0;}
+.recommend_item:nth-child(5n){margin-left: 0;}
+.recommend_item:nth-child(4n){margin-right: 0;}
+.state{position: absolute; top: 0; width: 180px;}
+.event, .new, .discount{float: left; width: 60px;height: 60px; line-height: 60px; text-align: center;}
+.event{background-color: red; color: #fff; display: none;}
+.event.active{display: inline-block;}
+.new{background-color: skyblue; color: whitesmoke; display: none;}
+.new.active{display: inline-block;}
+.discount{background-color: aquamarine; color: blueviolet; display: none;}
+.discount.active{display: inline-block;}
+.item_name{font-size: 24px;}
+.price{font-size: 20px;}
+.desc{position: relative;}
+.action{position: relative; height: 40px; margin-top: 10px;}
+.go_cart{position: absolute;left: 120px; border: 1px solid #333; border-radius: 15px; padding: 10px; background-color: #333; color: #fff; cursor: pointer;}
+.go_buy{position: absolute; right: 5px;border: 1px solid #333; border-radius: 15px; padding: 10px;cursor: pointer;background-color: #333; color: #fff;}
+
+.go_cart:hover{background-color: yellow; color: #333;; font-weight: bold; }
+.go_buy:hover{background-color: yellow; color: #333;; font-weight: bold;}
+
+.move{position: fixed; bottom: 10px; right: 10px; display: none;}
+.move > .top i, .move > .bot i{font-size: 30px; display: inline-block; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);}
+.move .top{margin-bottom: 10px;}
+.move .top:hover{background-color: #ddd;}
+.move .bot:hover{background-color: #ddd;}
+.move > .top, .move > .bot{border:1px solid #ddd; border-radius: 40px; width: 40px; height: 40px; position: relative; cursor: pointer;}
+.btnAction{width: 100%;height: 100%; position: absolute; top: 0; margin-top: -820px; overflow: hidden; z-index: 99999999; transition: margin-top 1s;}
+.btnAction.active{margin-top: 0; transition: 1s;}
+.btnActionRight{width: 70%;height: 100%;float: left; background-color:rgba(50,9,0,0.7); opacity: 0.3; }
+.btnActionRight i{font-size: 50px; float: right; margin: 10px; cursor: pointer; color: #fff;}
+.btnActionLeft{width: 30%;height: 100%;float: left;background: #666;}
