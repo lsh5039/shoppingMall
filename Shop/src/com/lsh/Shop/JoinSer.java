@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.lsh.Shop.db.UserDAO;
 
 
-@WebServlet("/JoinSer")
+@WebServlet("/joinpage")
 public class JoinSer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

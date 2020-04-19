@@ -125,6 +125,39 @@ public class UserDAO {
 		}
 		return result;
 	}
+	public static int login(User user) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int result = 0;
+//		0 DB오류
+//		1 로그인성공
+//		-2비밀번호불일치
+//		-1아이디 불일치
+		String sql = "select * from user where id = ?";
+		try {
+			con = Conn.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, user.getId());
+			rs = ps.executeQuery();
+			if(rs.next()) {//아이디는 일치하는경우
+				String chkPw = rs.getString("password");
+				if(chkPw.equals(user.getPassword())) {//비밀번호까지 일치하는경우
+					result = 1;//로그인 성공
+				}else {
+					result = -2;//비밀번호 불일치
+				}
+			}else {
+				result = -1;//아이디 불일치
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			Conn.close(con, ps, rs);
+		}
+		return result;
+	}
 	
 	
 }
