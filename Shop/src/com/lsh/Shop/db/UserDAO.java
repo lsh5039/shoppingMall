@@ -51,12 +51,15 @@ public class UserDAO {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, id);
 			rs = ps.executeQuery();
-			while(rs.next()) {
+			if(rs.next()) {
 				user.setId(rs.getString("id"));
 				user.setPassword(rs.getString("password"));
 				user.setName(rs.getString("name"));
 				user.setAddress(rs.getString("address"));
 				user.setNumber(rs.getString("number"));
+				user.setGrade(rs.getInt("grade"));
+			}else {
+				user.setId(null);//id가 중복되지않는경우
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -106,18 +109,33 @@ public class UserDAO {
 		}
 		return -1;//실패
 	}
-	public static int gradeMod(User user) {//관리자에의한 등급변경
+	public static int update(User user) {//정보변경
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "update user set grade=? where id=?";
 		int result = 0;
+		// 0 : 알수없는 DB오류
+		// 1 : 성공
+		// -1 : 정보변경실패
+		String sql = "update user set grade=? where id=?";//관리자에의한 정보변경
+		if(user.getPassword()!=null) {//비밀번호가 들어온 경우 고객에의한 정보변경
+//			System.out.println("들어오 id : "+user.getId());
+			sql = "update user set password = ?, name = ?, address=?, number=? where id =?";
+		}
 		try {
 			con = Conn.getCon();
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, user.getGrade());
-			ps.setString(2, user.getId());
+			if(user.getPassword()!=null) {
+				
+				ps.setString(1, user.getPassword());
+				ps.setString(2, user.getName());
+				ps.setString(3, user.getAddress());
+				ps.setString(4, user.getNumber());
+				ps.setString(5, user.getId());
+			}else {
+				ps.setInt(1, user.getGrade());
+				ps.setString(2, user.getId());
+			}
 			result = ps.executeUpdate();
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {

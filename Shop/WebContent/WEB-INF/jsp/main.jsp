@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,15 +8,17 @@
     <title>언더비</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/main.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="/js/main.js"></script>
 
         
 
            
 </head>
 <body>
+
+
     <header>
        <div class="headerwrap">
             <div class="left_header">
@@ -27,14 +30,26 @@
                 <p class="left_header_items"><a href="#">BOOKMARK</a></p>
             </div>
             <div class="right_header">
+        
                 <button><img src="https://placehold.it/20x20"></button>
                 <input type="text" placeholder="검색">
                 <p><a href="#">ORDER</a></p>
                 <p><a href="#">CART</a></p>
                 <p><a href="#">MYSHOP</a></p>
-                <p><a href="/joinpage">JOIN</a></p>
-                <p><a href="/loginpage">LOGIN</a></p>
-                 
+<c:choose>
+	<c:when test="${loginUser == null}">
+		 <p><a href="/joinpage">JOIN</a></p>
+         <p><a href="/loginpage">LOGIN</a></p>
+	</c:when>
+	<c:when test="${loginUser.id eq 'admin' }">
+		<p><a href=/usergrade>관리자페이지</a></p>
+         <p><a href="/logoutpage">LOGOUT</a></p>
+	</c:when>
+	<c:otherwise>
+		  <p onclick ="myInfoMod('${loginUser.id}')" style="cursor:pointer">계정관리</p>
+         <p><a href="/logoutpage">LOGOUT</a></p>
+	</c:otherwise>
+</c:choose>       
             </div>
         </div>
     </header>
@@ -324,18 +339,15 @@
                     <p>깽랭Tv를 youtube로~</p>
                </div>
            </div>
-           
-           
-           
-           
-           
-           
-           
-           
-           
        </div>
        
    </div>
+   <script>
+   function myInfoMod(id){
+	   location.href='/myinfo/mod/page?id='+id;
+   }
+   
+   </script>
 
 </body>
 </html>

@@ -38,12 +38,12 @@ public class UserModSer extends HttpServlet {
 		user.setId(id);
 		user.setGrade(intGrade);
 		int result = 0;
-		result = UserDAO.gradeMod(user);
+		result = UserDAO.update(user);
 		if(result==1) {
 			PrintWriter writer = response.getWriter();
 			writer.println("<script>");
 			writer.println("alert('등급변경에 성공')");
-			writer.println("location.href='managementPage'");
+			writer.println("location.href='/usergrade'");
 			writer.println("</script>");
 			writer.close();
 		}else {

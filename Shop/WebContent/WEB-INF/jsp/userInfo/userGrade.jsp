@@ -20,7 +20,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<h1>등급관리 페이지</h1>
+		<h1>등급관리 페이지(관리자 삭제불가)</h1>
 		<table>
 			<tr>
 				<th>아이디</th>
@@ -78,7 +78,8 @@
 			}
 		}
 		function del(id){
-			if(confirm(id+"를 삭제합니다.")){
+			if(id=="admin"){alert('관리자 계정은 삭제불가')}
+			else if(confirm(id+"를 삭제합니다.")){
 				location.href="del?id="+id;
 			}
 		}
