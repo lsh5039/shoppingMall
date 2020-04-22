@@ -54,6 +54,7 @@ nav.active{position: fixed; top: 60px; z-index: 999; background-color: #f1f1f1; 
 .recommend{margin-top: 200px;}
 .recommend_wrap{width: 1500px; margin: 0 auto; overflow: hidden;}
 .recommend_item{float: left; margin: 0 40px; position: relative; margin-bottom: 40px; box-shadow: 0 0 3px 3px rgba(0,0,0,0.5);  box-sizing: border-box;}
+.recommend_item img{width:300px; height:336px;}
 .recommend_item:first-child{margin-left: 0;}
 .recommend_item:nth-child(5n){margin-left: 0;}
 .recommend_item:nth-child(4n){margin-right: 0;}

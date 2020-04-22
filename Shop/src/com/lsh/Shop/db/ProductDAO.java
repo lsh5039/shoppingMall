@@ -23,10 +23,15 @@ public class ProductDAO {
 			
 			while(rs.next()) {
 				Product pd = new Product();
-				 pd.setP_name(rs.getString("p_name"));
-				pd.setP_price(rs.getInt("p_price"));
-				pd.setCategory(rs.getString("category"));
-				pd.setP_img(rs.getString("p_img"));
+				pd.setP_num(rs.getInt("p_num"));
+				pd.setP_name(rs.getString("p_name"));
+				pd.setP_price(rs.getString("p_price"));
+				pd.setP_category(rs.getString("p_category"));
+				pd.setP_file(rs.getString("p_file"));
+				pd.setP_realfile("p_realfile");
+				pd.setP_discount(rs.getInt("p_discount"));
+				pd.setP_event(rs.getInt("p_event"));
+				pd.setP_new(rs.getInt("p_new"));
 				list.add(pd);
 			}
 			
@@ -39,26 +44,33 @@ public class ProductDAO {
 	}
 	
 	
-	public int uploadPro(Product pd) {
+	public static int uploadPro(Product pd) {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "insert into product (p_name, p_price, category, p_img) values(?,?,?,?)";
+		String sql = "insert into product (p_name, p_price, p_category, p_new, p_event, p_discount, p_file, p_realfile) values(?,?,?,?,?,?,?,?)";
+		int result = 0;
 		try {
 			con = Conn.getCon();
 			ps = con.prepareStatement(sql);
 			ps.setString(1, pd.getP_name());
-			ps.setInt(2, pd.getP_price());
-			ps.setString(3, pd.getCategory());
-			ps.setString(4, pd.getP_img());
-			ps.execute();
+			ps.setString(2, pd.getP_price());
+			ps.setString(3, pd.getP_category());
+			ps.setInt(4, pd.getP_new());
+			ps.setInt(5, pd.getP_event());
+			ps.setInt(6, pd.getP_discount());
+			ps.setString(7, pd.getP_file());
+			ps.setString(8, pd.getP_realfile());
 			
-			return 1;
+			result = ps.executeUpdate();
+			//1정상   0,-1 비정상
+			
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			Conn.close(con, ps, null);
 		}
-		return -1;//실패
+		return result;
 	}
 	
 	

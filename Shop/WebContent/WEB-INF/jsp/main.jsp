@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -193,15 +193,34 @@
    
    <div class="recommend">
        <div class="recommend_wrap">
+       <c:forEach var="item" items="${list}">
+                <div class="recommend_item">
+                	<img src="/upload/${item.p_file}"/>
+                	
+				<div class="state">
+                   <div class="event">이벤트</div>
+                   <div class="new active">new</div>
+                   <div class="discount active">할인</div>
+               </div>
+               <div class="desc">
+                   <h2 class="item_name active">상품명 : ${item.p_name} </h2>
+                   <p class="price">가격 : ${item.p_price}</p>
+                   <div class="action">
+                       <div class="go_cart">장바구니</div>
+                       <div class="go_buy">구매하기</div>
+                   </div>
+               </div>
+                </div>
+        </c:forEach>
            <div class="recommend_item">
-               <img src="https://placehold.it/300x336">
+               <img src="https://placehold.it">
                <div class="state">
                    <div class="event">이벤트</div>
                    <div class="new active">new</div>
                    <div class="discount active">할인</div>
                </div>
                 <div class="desc">
-                   <h2 class="item_name">상품명 : lorem</h2>
+                   <h2 class="item_name">상품명 :</h2>
                    <p class="price">lorem</p><div class="action">
                        <div class="go_cart">장바구니</div>
                        <div class="go_buy">구매하기</div>
@@ -209,9 +228,10 @@
                </div>
                
            </div>
-           <div class="recommend_item">
+          <!--  <div class="recommend_item">
                <img src="https://placehold.it/300x336">
                <div class="state">
+               
                    <div class="event">이벤트</div>
                    <div class="new active">new</div>
                    <div class="discount">할인</div>
@@ -288,7 +308,7 @@
                    </div>
                </div>
                
-           </div>
+           </div> -->
            
        </div>
        
@@ -342,6 +362,11 @@
        </div>
        
    </div>
+   
+  		
+   
+        <!-- <img src="/upload/회원정보변경.PNG"/> -->
+        
    <script>
    function myInfoMod(id){
 	   location.href='/myinfo/mod/page?id='+id;
