@@ -69,8 +69,7 @@
 				}
 			%>
 		</table>
-	
-	
+	<a href="/upload/product" style="margin-top:30px;">상품 등록페이지</a>
 	<script>
 		function mod(id){
 			if(confirm(id+"를 수정합니다.")){

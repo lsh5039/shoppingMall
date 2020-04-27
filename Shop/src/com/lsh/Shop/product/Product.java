@@ -10,6 +10,10 @@ public class Product {
 	private int p_event;
 	private int p_new;
 	private int p_discount;
+	
+	
+	
+	
 	public int getP_num() {
 		return p_num;
 	}

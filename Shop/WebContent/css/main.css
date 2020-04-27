@@ -53,11 +53,32 @@ nav.active{position: fixed; top: 60px; z-index: 999; background-color: #f1f1f1; 
 
 .recommend{margin-top: 200px;}
 .recommend_wrap{width: 1500px; margin: 0 auto; overflow: hidden;}
-.recommend_item{float: left; margin: 0 40px; position: relative; margin-bottom: 40px; box-shadow: 0 0 3px 3px rgba(0,0,0,0.5);  box-sizing: border-box;}
+.recommend_item{float: left; margin: 0 40px; position: relative; margin-bottom: 40px; box-shadow: 0 0 3px 3px rgba(0,0,0,0.5);  box-sizing: border-box; cursor:pointer;}
 .recommend_item img{width:300px; height:336px;}
+ /* .recommend_item:hover.recommend_item > img{width:400px; height:448px;"} */
+.recommend_item img {
+    -webkit-transform:scale(1);
+    -moz-transform:scale(1);
+    -ms-transform:scale(1); 
+    -o-transform:scale(1);  
+    transform:scale(1);
+    -webkit-transition:.3s;
+    -moz-transition:.3s;
+    -ms-transition:.3s;
+    -o-transition:.3s;
+    transition:.3s;
+}
+.recommend_item:hover img {
+    -webkit-transform:scale(1.2);
+    -moz-transform:scale(1.2);
+    -ms-transform:scale(1.2);   
+    -o-transform:scale(1.2);
+    transform:scale(1.2);
+}
+.imgBox{width:300px; height:336px; overflow:hidden;}
 .recommend_item:first-child{margin-left: 0;}
-.recommend_item:nth-child(5n){margin-left: 0;}
-.recommend_item:nth-child(4n){margin-right: 0;}
+.recommend_item:nth-child(4n+4){margin-right: 0;}
+.recommend_item:nth-child(4n+1){margin-left: 0;}
 .state{position: absolute; top: 0; width: 180px;}
 .event, .new, .discount{float: left; width: 60px;height: 60px; line-height: 60px; text-align: center;}
 .event{background-color: red; color: #fff; display: none;}
@@ -82,7 +103,7 @@ nav.active{position: fixed; top: 60px; z-index: 999; background-color: #f1f1f1; 
 .move .top:hover{background-color: #ddd;}
 .move .bot:hover{background-color: #ddd;}
 .move > .top, .move > .bot{border:1px solid #ddd; border-radius: 40px; width: 40px; height: 40px; position: relative; cursor: pointer;}
-.btnAction{width: 100%;height: 100%; position: absolute; top: 0; margin-top: -820px; overflow: hidden; z-index: 99999999; transition: margin-top 1s;}
+.btnAction{width: 100%;height: 100%; position: absolute; top: 0; margin-top: -900px; overflow: hidden; z-index: 99999999; transition: margin-top 1s;}
 .btnAction.active{margin-top: 0; transition: 1s;}
 .btnActionRight{width: 70%;height: 100%;float: left; background-color:rgba(50,9,0,0.7);  }
 .btnActionRight i{font-size: 50px; float: right; margin: 10px; cursor: pointer; color: #fff;}

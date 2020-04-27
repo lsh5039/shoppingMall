@@ -195,12 +195,24 @@
        <div class="recommend_wrap">
        <c:forEach var="item" items="${list}">
                 <div class="recommend_item">
+                	<div class="imgBox">
                 	<img src="/upload/${item.p_file}"/>
-                	
+                	</div>
 				<div class="state">
-                   <div class="event">이벤트</div>
+				<%-- <c:choose> --%>
+				<c:if test = "${item.p_event == 1}" >
+					<div class="event active">이벤트</div>
+				</c:if>
+				<c:if test = "${item.p_new == 1}" >
+					<div class="new active">신상품</div>
+				</c:if>
+				<c:if test = "${item.p_discount == 1}" >
+					<div class="discount active">할인</div>
+				</c:if>
+				<%-- </c:choose> --%>
+                   <!-- 
                    <div class="new active">new</div>
-                   <div class="discount active">할인</div>
+                   <div class="discount active">할인</div> -->
                </div>
                <div class="desc">
                    <h2 class="item_name active">상품명 : ${item.p_name} </h2>
@@ -212,22 +224,7 @@
                </div>
                 </div>
         </c:forEach>
-           <div class="recommend_item">
-               <img src="https://placehold.it">
-               <div class="state">
-                   <div class="event">이벤트</div>
-                   <div class="new active">new</div>
-                   <div class="discount active">할인</div>
-               </div>
-                <div class="desc">
-                   <h2 class="item_name">상품명 :</h2>
-                   <p class="price">lorem</p><div class="action">
-                       <div class="go_cart">장바구니</div>
-                       <div class="go_buy">구매하기</div>
-                   </div>
-               </div>
-               
-           </div>
+           
           <!--  <div class="recommend_item">
                <img src="https://placehold.it/300x336">
                <div class="state">
