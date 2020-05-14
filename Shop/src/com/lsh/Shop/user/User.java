@@ -9,9 +9,17 @@ public class User {
 	private int grade;
 	private int have_money;
 	private int spend_money;
+	private int pk;
 	
 	
 	
+	
+	public int getPk() {
+		return pk;
+	}
+	public void setPk(int pk) {
+		this.pk = pk;
+	}
 	public int getHave_money() {
 		return have_money;
 	}

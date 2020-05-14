@@ -21,6 +21,13 @@ public class LoginSer extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession hs = request.getSession();
+		User loginUser = (User)hs.getAttribute("loginUser");
+		if(loginUser != null) {
+			response.sendRedirect("/index");
+			return;
+		}
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/userInfo/login.jsp");
 		rd.forward(request, response);
 	}
@@ -32,11 +39,12 @@ public class LoginSer extends HttpServlet {
 		User user = new User();
 		user.setId(id);
 		user.setPassword(password);
+		
 		int result = UserDAO.login(user);
-//		0 DB¿À·ù
-//		1 ·Î±×ÀÎ¼º°ø
-//		-2ºñ¹Ğ¹øÈ£ºÒÀÏÄ¡
-//		-1¾ÆÀÌµğ ºÒÀÏÄ¡
+//		0 DBì—ëŸ¬
+//		1 ì„±ê³µ
+//		-2ë¹„ë°€ë²ˆí˜¸ í‹€ë¦¼
+//		-1ì•„ì´ë”” ì—†ìŒ
 		
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -44,18 +52,19 @@ public class LoginSer extends HttpServlet {
 		writer.println("<script>");
 		if(result==1) {
 			user = UserDAO.getOne(id);
-			writer.println("alert('È¯¿µÇÕ´Ï´Ù °í°´´Ô')");
+			writer.println("alert('í™˜ì˜í•©ë‹ˆë‹¤ ê³ ê°ë‹˜')");
 			HttpSession session =request.getSession();
+			
 			session.setAttribute("loginUser", user);
-			writer.println("location.href='/main'");
+			writer.println("location.href='/index'");
 		}else if(result==-1) {
-			writer.println("alert('¾ÆÀÌµğ°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.')");
+			writer.println("alert('ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´ë”” ì…ë‹ˆë‹¤.')");
 			writer.println("history.back();");
 		}else if(result==-2) {
-			writer.println("alert('ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.')");
+			writer.println("alert('íŒ¨ìŠ¤ì›Œë“œê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.')");
 			writer.println("history.back();");
 		}else {
-			writer.println("alert('¾Ë¼ö¾ø´Â ¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù.')");
+			writer.println("alert('DBì—ëŸ¬ ë°œìƒ')");
 			writer.println("hitory.back();");
 		}
 		

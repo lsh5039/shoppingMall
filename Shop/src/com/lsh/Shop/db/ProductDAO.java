@@ -43,6 +43,54 @@ public class ProductDAO {
 		return pd;
 	}
 	
+	public static List<Product> getList(Product param){
+		List<Product> list = new ArrayList<Product>();
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = " select * from Product ";
+		
+		if(param.getP_new()==1) {//ì¹´í…Œê³ ë¦¬ ë¶„ë¥˜
+			sql+=" where p_new = 1" ;
+		} else if(param.getP_event()==1) {
+			sql+=" where p_event = 1 ";
+		} else if(param.getP_discount()==1) {
+			sql+=" where p_discount = 1 ";
+		}
+		
+		if(param.getFind() != null) {//ê²€ìƒ‰
+			sql+="where p_name like '%"+param.getFind()+"%' ";
+		}
+		
+		
+		try {
+			con = Conn.getCon();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Product pd = new Product();
+				pd.setP_num(rs.getInt("p_num"));
+				pd.setP_name(rs.getString("p_name"));
+				pd.setP_price(rs.getString("p_price"));
+				pd.setP_category(rs.getString("p_category"));
+				pd.setP_file(rs.getString("p_file"));
+				pd.setP_realfile("p_realfile");
+				pd.setP_discount(rs.getInt("p_discount"));
+				pd.setP_event(rs.getInt("p_event"));
+				pd.setP_new(rs.getInt("p_new"));
+				list.add(pd);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			Conn.close(con, ps, rs);
+		}
+		return list;
+	}
+	
+	
 	
 	
 	
@@ -98,7 +146,7 @@ public class ProductDAO {
 			ps.setString(8, pd.getP_realfile());
 			
 			result = ps.executeUpdate();
-			//1Á¤»ó   0,-1 ºñÁ¤»ó
+			//1ï¿½ï¿½ï¿½ï¿½   0,-1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			
 			
 		}catch(Exception e) {
@@ -128,7 +176,7 @@ public class ProductDAO {
 		return result;
 	}
 	
-	public static int proMod(Product param) {//»óÇ°¼öÁ¤
+	public static int proMod(Product param) {//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
 		int result=0;
 		Connection con = null;
 		PreparedStatement ps = null;

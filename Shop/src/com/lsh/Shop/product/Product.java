@@ -10,10 +10,18 @@ public class Product {
 	private int p_event;
 	private int p_new;
 	private int p_discount;
+	private String find;
 	
 	
 	
 	
+	
+	public String getFind() {
+		return find;
+	}
+	public void setFind(String find) {
+		this.find = find;
+	}
 	public int getP_num() {
 		return p_num;
 	}

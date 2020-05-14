@@ -29,7 +29,7 @@
        <div class="headerwrap">
             <div class="left_header">
                 <p class="left_header_items"><a href="#">NOTICE</a></p>
-                <p class="left_header_items"><a href="#">Q&A</a></p>
+                <p class="left_header_items"><a href="/q&a">Q&A</a></p>
                 <p class="left_header_items"><a href="#">REVIEW</a></p>
                 <p class="left_header_items"><a href="#">DELAY</a></p>
                 <p class="left_header_items"><a href="#">DELIVERY</a></p>
@@ -42,8 +42,7 @@
                 <p><a href="#">CART</a></p>
                 <p><a href="#">MYSHOP</a></p>
                 <p><a href="/joinpage">JOIN</a></p>
-                <p><a href="#">LOGIN</a></p>
-                 
+                <p><a href="/loginpage">LOGIN</a></p>
             </div>
         </div>
     </header>
@@ -104,6 +103,7 @@
             }
         }
         function afterChkID(){
+        	
         	if(msg.innerHTML != '사용 가능한 아이디입니다.'){
         		alert('아이디 중복확인 후 진행해주세요');
         		frm.id.focus();
@@ -111,6 +111,10 @@
         	}
         }
         function chkID(id){
+        	if(id==""){
+        		msg.innerHTML = '아이디를 입력해주세요';
+        		return;
+        	}
         	location.href="checkID?id="+id;
         }
 

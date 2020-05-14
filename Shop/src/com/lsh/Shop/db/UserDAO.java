@@ -58,8 +58,9 @@ public class UserDAO {
 				user.setAddress(rs.getString("address"));
 				user.setNumber(rs.getString("number"));
 				user.setGrade(rs.getInt("grade"));
+				user.setPk(rs.getInt("pk"));
 			}else {
-				user.setId(null);//id°¡ Áßº¹µÇÁö¾Ê´Â°æ¿ì
+				user.setId(null);//idï¿½ï¿½ ï¿½ßºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê´Â°ï¿½ï¿½
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -84,13 +85,13 @@ public class UserDAO {
 			ps.setString(4,address);
 			ps.setString(5, number);
 			ps.execute();
-			return 1;//¼º°ø
+			return 1;//ï¿½ï¿½ï¿½ï¿½
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			Conn.close(con, ps, null);
 		}
-		return -1;//½ÇÆĞ
+		return -1;//ï¿½ï¿½ï¿½ï¿½
 	}
 	public static int del(String id) {
 		Connection con = null;
@@ -101,24 +102,24 @@ public class UserDAO {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, id);
 			ps.execute();
-			return 1;//¼º°ø
+			return 1;//íšŒì›ì‚­ì œì„±ê³µ
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			Conn.close(con, ps, null);
 		}
-		return -1;//½ÇÆĞ
+		return -1;//ì‹¤íŒ¨
 	}
-	public static int update(User user) {//Á¤º¸º¯°æ
+	public static int update(User user) {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
-		// 0 : ¾Ë¼ö¾ø´Â DB¿À·ù
-		// 1 : ¼º°ø
-		// -1 : Á¤º¸º¯°æ½ÇÆĞ
-		String sql = "update user set grade=? where id=?";//°ü¸®ÀÚ¿¡ÀÇÇÑ Á¤º¸º¯°æ
-		if(user.getPassword()!=null) {//ºñ¹Ğ¹øÈ£°¡ µé¾î¿Â °æ¿ì °í°´¿¡ÀÇÇÑ Á¤º¸º¯°æ
-//			System.out.println("µé¾î¿À id : "+user.getId());
+		// 0 : ï¿½Ë¼ï¿½ï¿½ï¿½ï¿½ï¿½ DBï¿½ï¿½ï¿½ï¿½
+		// 1 : ï¿½ï¿½ï¿½ï¿½
+		// -1 : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		String sql = "update user set grade=? where id=?";//ï¿½ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		if(user.getPassword()!=null) {//ï¿½ï¿½Ğ¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//			System.out.println("ï¿½ï¿½ï¿½ï¿½ id : "+user.getId());
 			sql = "update user set password = ?, name = ?, address=?, number=? where id =?";
 		}
 		try {
@@ -148,25 +149,26 @@ public class UserDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		int result = 0;
-//		0 DB¿À·ù
-//		1 ·Î±×ÀÎ¼º°ø
-//		-2ºñ¹Ğ¹øÈ£ºÒÀÏÄ¡
-//		-1¾ÆÀÌµğ ºÒÀÏÄ¡
+//		0 DBì—ëŸ¬
+//		1 ì„±ê³µ
+//		-2íŒ¨ìŠ¤ì›Œë“œ ë¶ˆì¼ì¹˜
+//		-1ì•„ì´ë”” ì—†ìŒ
 		String sql = "select * from user where id = ?";
 		try {
 			con = Conn.getCon();
 			ps = con.prepareStatement(sql);
 			ps.setString(1, user.getId());
 			rs = ps.executeQuery();
-			if(rs.next()) {//¾ÆÀÌµğ´Â ÀÏÄ¡ÇÏ´Â°æ¿ì
+			if(rs.next()) {//ì•„ì´ë””ëŠ” ë§ìŒ
 				String chkPw = rs.getString("password");
-				if(chkPw.equals(user.getPassword())) {//ºñ¹Ğ¹øÈ£±îÁö ÀÏÄ¡ÇÏ´Â°æ¿ì
-					result = 1;//·Î±×ÀÎ ¼º°ø
+				if(chkPw.equals(user.getPassword())) {//ì•„ì´ë”” ë¹„ë°€ë²ˆí˜¸ ì¼ì¹˜
+					user.setPk(rs.getInt("pk"));
+					result = 1;//ë¡œê·¸ì¸ ì„±ê³µ
 				}else {
-					result = -2;//ºñ¹Ğ¹øÈ£ ºÒÀÏÄ¡
+					result = -2;//íŒ¨ìŠ¤ì›Œë“œ ë¶ˆì¼ì¹˜
 				}
 			}else {
-				result = -1;//¾ÆÀÌµğ ºÒÀÏÄ¡
+				result = -1;//ì•„ì´ë”” ì—†ìŒ
 			}
 			
 		}catch(Exception e) {

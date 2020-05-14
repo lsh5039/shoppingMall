@@ -24,7 +24,7 @@ public class UserDelSer extends HttpServlet {
 		if(result == -1) {
 			PrintWriter writer = response.getWriter();
 			writer.println("<script>");
-			writer.println("alert('»èÁ¦¿¡ ½ÇÆĞ !)");
+			writer.println("alert('íšŒì›ì‚­ì œì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.')");
 			writer.println("</script>");
 		}
 		

@@ -80,13 +80,13 @@ nav.active{position: fixed; top: 60px; z-index: 999; background-color: #f1f1f1; 
 .recommend_item:nth-child(4n+4){margin-right: 0;}
 .recommend_item:nth-child(4n+1){margin-left: 0;}
 .state{position: absolute; top: 0; width: 180px;}
-.event, .new, .discount{float: left; width: 60px;height: 60px; line-height: 60px; text-align: center;}
+.event, .new, .dis{float: left; width: 60px;height: 60px; line-height: 60px; text-align: center;}
 .event{background-color: red; color: #fff; display: none;}
 .event.active{display: inline-block;}
 .new{background-color: skyblue; color: whitesmoke; display: none;}
 .new.active{display: inline-block;}
-.discount{background-color: aquamarine; color: blueviolet; display: none;}
-.discount.active{display: inline-block;}
+.dis{background-color: aquamarine; color: blueviolet; display: none;}
+.dis.active{display: inline-block;}
 .item_name{font-size: 24px;}
 .price{font-size: 20px;}
 .desc{position: relative;}

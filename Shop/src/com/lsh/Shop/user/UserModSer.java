@@ -19,7 +19,7 @@ public class UserModSer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");//¼öÁ¤ÇÒ °èÁ¤Á¤º¸¸¦ ÇÏ³ª¸¸ ³Ñ°ÜÁÜ
+		String id = request.getParameter("id");//
 		User user = new User();
 		user = UserDAO.getOne(id);
 		request.setAttribute("user", user);
@@ -42,14 +42,14 @@ public class UserModSer extends HttpServlet {
 		if(result==1) {
 			PrintWriter writer = response.getWriter();
 			writer.println("<script>");
-			writer.println("alert('µî±Şº¯°æ¿¡ ¼º°ø')");
+			writer.println("alert('ë³€ê²½ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤.')");
 			writer.println("location.href='/usergrade'");
 			writer.println("</script>");
 			writer.close();
 		}else {
 			PrintWriter writer = response.getWriter();
 			writer.println("<script>");
-			writer.println("alert('µî±Şº¯°æ¿¡ ½ÇÆĞ')");
+			writer.println("alert('ë³€ê²½ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.')");
 			writer.println("history.back();");
 			writer.println("</script>");
 			writer.close();

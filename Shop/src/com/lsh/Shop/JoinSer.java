@@ -37,7 +37,7 @@ public class JoinSer extends HttpServlet {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
 			writer.println("<script>");
-			writer.println("alert('°¡ÀÔ¿¡ ¼º°øÇß½À´Ï´Ù.');");
+			writer.println("alert('íšŒì›ê°€ì…ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤.');");
 			writer.println("location.href='main'");
 			writer.println("</script>");
 			writer.close();
@@ -46,7 +46,7 @@ public class JoinSer extends HttpServlet {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
 			writer.println("<script>");
-			writer.println("alert('°¡ÀÔ¿¡ ½ÇÆĞÇß½À´Ï´Ù.')");
+			writer.println("alert('íšŒì›ê°€ì…ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.')");
 			writer.println("history.back()");
 			writer.println("</script>");
 			writer.close();

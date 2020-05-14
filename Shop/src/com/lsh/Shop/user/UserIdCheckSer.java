@@ -25,12 +25,12 @@ public class UserIdCheckSer extends HttpServlet {
 		System.out.println(id);
 		System.out.println(user.getId());
 		if(user.getId()!=null) {
-			request.setAttribute("msg", "¾ÆÀÌµğ°¡ Áßº¹µÇ¾ú½À´Ï´Ù.");
+			request.setAttribute("msg", "ì‚¬ìš© ê°€ëŠ¥í•œ ì•„ì´ë””ì…ë‹ˆë‹¤.");
 			request.setAttribute("id", id);
 			RequestDispatcher rd = request.getRequestDispatcher("joinpage");
 			rd.forward(request, response);
-		}else {//Áßº¹x
-			request.setAttribute("msg", "»ç¿ë °¡´ÉÇÑ ¾ÆÀÌµğÀÔ´Ï´Ù.");
+		}else {//ï¿½ßºï¿½x
+			request.setAttribute("msg", "ì¤‘ë³µëœ ì•„ì´ë”” ì…ë‹ˆë‹¤.");
 			request.setAttribute("id", id);
 			RequestDispatcher rd = request.getRequestDispatcher("joinpage");
 			rd.forward(request, response);

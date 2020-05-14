@@ -23,7 +23,7 @@ public class ProRegModSer extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mod = request.getParameter("mod");
 		String del = request.getParameter("del");
-		if(mod!=null && del==null) {//¼öÁ¤
+		if(mod!=null && del==null) {//ìˆ˜ì •ì‚­ì œê°€ ì•„ë‹Œê²½ìš° , ê·¸ëƒ¥ ë””í…Œì¼ì •ë³´
 			int modInt = Integer.parseInt(mod);
 			Product pd = new Product();
 			pd.setP_num(modInt);
@@ -31,13 +31,13 @@ public class ProRegModSer extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/ceo/proMod.jsp");
 			rd.forward(request, response);
 			
-		}else if(mod==null && del!=null) {//»èÁ¦
+		}else if(mod==null && del!=null) {//ì‚­ì œì‹œ
 			int delInt = Integer.parseInt(del);
 			Product pd = new Product();
 			pd.setP_num(delInt);
 			int result = ProductDAO.proDel(pd);
-			String msg="»óÇ°»èÁ¦¿¡ ½ÇÆĞÇß½À´Ï´Ù.";
-			if(result!=1) {//»èÁ¦½ÇÆĞ db¿¡·¯
+			String msg="ì‚­ì œì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.";
+			if(result!=1) {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ dbï¿½ï¿½ï¿½ï¿½
 				request.setAttribute("msg", msg);
 			}
 			response.sendRedirect("/upload/product");

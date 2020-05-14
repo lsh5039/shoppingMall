@@ -11,16 +11,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <style>
-	table, tr, td,th{border-collapse:collapse; border:1px solid #333;}
-	
 
+	table, tr, td,th{border-collapse:collapse; border:1px solid #333;}
+	 *{margin: 0;padding: 0; font-size: 16px;}
+     .btn{width:100px;}
+	#title{font-size:26px; margin:50px 0;}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-		<h1>등급관리 페이지(관리자 삭제불가)</h1>
+		 <div>
+            <a href="/index"><button type="button" class="btn btn-primary">메인화면</button></a>
+            <a href="/upload/product"><button type="button" class="btn btn-primary">상품등록</button></a>
+            <a href="/usergrade"><button type="button" class="btn btn-primary">회원관리</button></a>
+            <a href="#"><button type="button" class="btn btn-primary">lorem</button></a>
+          </div>
+		<h1 id="title">등급관리 페이지(관리자 삭제불가)</h1>
 		<table>
 			<tr>
 				<th>아이디</th>

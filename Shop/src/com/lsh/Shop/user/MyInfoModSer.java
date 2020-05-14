@@ -39,11 +39,11 @@ public class MyInfoModSer extends HttpServlet {
 		 response.setContentType("text/html; charset=UTF-8");
 		 PrintWriter writer = response.getWriter();
 		 writer.println("<script>");
-		 if(result == 1) {//Á¤º¸º¯°æ ¼º°ø
-			 writer.println("alert('Á¤º¸º¯°æ¿¡ ¼º°øÇß½À´Ï´Ù ´Ù½Ã·Î±×ÀÎ ÇØÁÖ¼¼¿ä')");
+		 if(result == 1) {//ì„±ê³µ
+			 writer.println("alert('ì—…ë°ì´íŠ¸ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤.')");
 			 writer.println("location.href='/logoutpage'");
-		 }else {//db¿À·ù
-			 writer.println("alert('Á¤º¸º¯°æ¿¡ ½ÇÆĞÇß½À´Ï´Ù.')");
+		 }else {//dbï¿½ï¿½ï¿½ï¿½
+			 writer.println("alert('ì—…ë°ì´íŠ¸ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.')");
 			 writer.println("history.back();");
 		 }
 		 writer.println("</script>");

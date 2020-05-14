@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>언더비</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
@@ -23,7 +24,7 @@
        <div class="headerwrap">
             <div class="left_header">
                 <p class="left_header_items"><a href="#">NOTICE</a></p>
-                <p class="left_header_items"><a href="#">Q&A</a></p>
+                <p class="left_header_items"><a href="/q&a">Q&A</a></p>
                 <p class="left_header_items"><a href="#">REVIEW</a></p>
                 <p class="left_header_items"><a href="#">DELAY</a></p>
                 <p class="left_header_items"><a href="#">DELIVERY</a></p>
@@ -116,7 +117,6 @@
            <p class="list"><a href="#">맨투맨&후드</a></p>
            <p class="list"><a href="#">Homewear</a></p>
            <p class="list"></p>
-          
        </div>
        <div class="item">
            <p class="list"><a href="#">블라우스</a></p>
@@ -191,6 +191,36 @@
        <i class="fas fa-arrow-right"></i>
    </div>
    
+   
+   
+   
+   <div class ="chItemWrap">
+	<select name='chItem' onchange="chItem()" id="chItem">
+	  <!-- <option value='1' selected>상품선택</option> -->
+	  <option value='all'>전체상품</option>
+	  <option value='event'>이벤트상품</option>
+	  <option value='new'>신상품</option>
+	  <option value='dis'>할인상품</option>
+	  
+	</select>
+	<input type="hidden" value="${ch}" id="ch">
+	
+   </div>
+   
+   
+   <div>
+ 
+   	<input type="text" placeholder="검색" id="find" value="${find }">
+    <span><button type="button" class="btn btn-dark" onclick="findItem()">검색하기</button></span>
+   
+   </div>
+   
+   
+   
+   
+   
+   
+   
    <div class="recommend">
        <div class="recommend_wrap">
        <c:forEach var="item" items="${list}">
@@ -207,12 +237,12 @@
 					<div class="new active">신상품</div>
 				</c:if>
 				<c:if test = "${item.p_discount == 1}" >
-					<div class="discount active">할인</div>
+					<div class="dis active">할인</div>
 				</c:if>
 				<%-- </c:choose> --%>
                    <!-- 
                    <div class="new active">new</div>
-                   <div class="discount active">할인</div> -->
+                   <div class="dis active">할인</div> -->
                </div>
                <div class="desc">
                    <h2 class="item_name active">상품명 : ${item.p_name} </h2>
@@ -224,89 +254,7 @@
                </div>
                 </div>
         </c:forEach>
-           
-          <!--  <div class="recommend_item">
-               <img src="https://placehold.it/300x336">
-               <div class="state">
-               
-                   <div class="event">이벤트</div>
-                   <div class="new active">new</div>
-                   <div class="discount">할인</div>
-               </div>
-                <div class="desc">
-                   <h2 class="item_name">lorem</h2>
-                   <p class="price">lorem</p><div class="action">
-                       <div class="go_cart">장바구니</div>
-                       <div class="go_buy">구매하기</div>
-                   </div>
-               </div>
-               
-           </div>
-           <div class="recommend_item">
-               <img src="https://placehold.it/300x336">
-               <div class="state">
-                   <div class="event">이벤트</div>
-                   <div class="new">new</div>
-                   <div class="discount active">할인</div>
-               </div>
-                <div class="desc">
-                   <h2 class="item_name">lorem</h2>
-                   <p class="price">lorem</p><div class="action">
-                       <div class="go_cart">장바구니</div>
-                       <div class="go_buy">구매하기</div>
-                   </div>
-               </div>
-               
-           </div>
-           <div class="recommend_item">
-               <img src="https://placehold.it/300x336">
-               <div class="state">
-                   <div class="event active">이벤트</div>
-                   <div class="new">new</div>
-                   <div class="discount active">할인</div>
-               </div>
-                <div class="desc">
-                   <h2 class="item_name">lorem</h2>
-                   <p class="price">lorem</p><div class="action">
-                       <div class="go_cart">장바구니</div>
-                       <div class="go_buy">구매하기</div>
-                   </div>
-               </div>
-               
-           </div>
-           <div class="recommend_item">
-               <img src="https://placehold.it/300x336">
-               <div class="state">
-                   <div class="event">이벤트</div>
-                   <div class="new active">new</div>
-                   <div class="discount active">할인</div>
-               </div>
-                <div class="desc">
-                   <h2 class="item_name">lorem</h2>
-                   <p class="price">lorem</p><div class="action">
-                       <div class="go_cart">장바구니</div>
-                       <div class="go_buy">구매하기</div>
-                   </div>
-               </div>
-           </div>
-           <div class="recommend_item">
-               <img src="https://placehold.it/300x336">
-               <div class="state">
-                   <div class="event active">이벤트</div>
-                   <div class="new">new</div>
-                   <div class="discount">할인</div>
-               </div>
-               <div class="desc">
-                   <h2 class="item_name active">lorem</h2>
-                   <p class="price">lorem</p>
-                   <div class="action">
-                       <div class="go_cart">장바구니</div>
-                       <div class="go_buy">구매하기</div>
-                   </div>
-               </div>
-               
-           </div> -->
-           
+
        </div>
        
    </div>
@@ -365,9 +313,77 @@
         <!-- <img src="/upload/회원정보변경.PNG"/> -->
         
    <script>
+   
+
+   var val = document.querySelector("#chItem");
+  
+
+  
+   
+
+   /* 
+   if(ch.value=="all"){
+	   val[0].selected =true;
+   }else if(ch.value=="event"){
+	   val[1].selected =true;
+   } else if(ch.value=="new"){
+	   val[2].selected =true;
+   } else if(ch.value=="dis"){
+	   val[3].selected =true;
+   } */
+   
+   
    function myInfoMod(id){
 	   location.href='/myinfo/mod/page?id='+id;
    }
+   
+   function chItem(){
+	   var target = document.querySelector("#chItem");
+	   var targetText = target.options[target.selectedIndex].value;
+	   display(targetText);
+	   var find = document.querySelector("#find");
+	   find.value="";
+   }
+   function display(ele){//특정 class빼고 안보이게 main페이지의 상품카테고리 설정
+	  var target = document.querySelectorAll("."+ele+".active");
+   	  var itemList = document.querySelectorAll(".recommend_item");
+   		 if(ele=="all"){
+   			for(var i=0;i<itemList.length;i++){//상품 다 안보이게
+   		        itemList[i].style.display="block";
+   		    }	   
+   			return;
+	   	 }
+   	 
+	   	for(var i=0;i<itemList.length;i++){//상품 다 안보이게
+	        itemList[i].style.display="none";
+	     	
+	    }
+	     for(var i=0;i<target.length;i++){//해당상품만 보이게, margin값 다시조절
+	        target[i].parentElement.parentElement.style.display="block";
+	        target[i].parentElement.parentElement.style.margin="0 40px 40px 40px";
+	        if(i%4==1){
+	        	target[i-1].parentElement.parentElement.style.marginLeft="0px";
+	    	}else if(i%4==0 &&i>0){
+	    		target[i-1].parentElement.parentElement.style.marginRight="0px";
+	    	}
+	        
+	    } 
+	    
+	     
+   }
+   
+  function findItem(){
+	  var find = document.querySelector("#find");
+	
+	  if(find.value==""){
+		  return;
+	  }
+	  
+	  location.href="/index?find="+find.value;
+  }
+   
+   
+   
    
    </script>
 

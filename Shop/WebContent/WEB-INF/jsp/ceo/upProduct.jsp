@@ -6,14 +6,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <style>
 #msg{color:red;}
 table,td,tr,th{border-collapse:collapse; border:1px solid #333; text-align:center;}
 img{width:300px; height:336px;}
+#title{margin:30px 0;}
+#frm{margin-bottom:30px;}
 </style>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-	<h1>상품을 등록합니다</h1>
+ 		  <div>
+            <a href="/index"><button type="button" class="btn btn-primary">메인화면</button></a>
+            <a href="/upload/product"><button type="button" class="btn btn-primary">상품등록</button></a>
+            <a href="/usergrade"><button type="button" class="btn btn-primary">회원관리</button></a>
+            <a href="#"><button type="button" class="btn btn-primary">lorem</button></a>
+          </div>
+	<h1 id="title">상품을 등록합니다</h1>
 	<form method="post" action="/upload/product" enctype="multipart/form-data" id="frm" onsubmit="return set()">
 	<div><input type="text" name="p_name" placeholder="상품명"></div>
 	<div><input type="text" name ="p_price"placeholder="가격"></div>
@@ -25,7 +35,7 @@ img{width:300px; height:336px;}
 	<div><input type="submit" value="상품업로드"></div>
 	<span id="msg"></span>
 	</form>
-	<a href="/index">메인페이지</a>
+	
 	
 	
 	${msg}

@@ -30,17 +30,19 @@ public class UploadSer extends HttpServlet {
 	
 		
 		String uploadDir =this.getClass().getResource("").getPath();
-
+		
 		 uploadDir = uploadDir.substring(1,uploadDir.indexOf(".metadata"))+"uploadTest/WebContent/uploadImage";
+		
 		String save="/upload";
 		String encType="UTF-8";
-		int maxSize =1024*1024*5;//5¸Ş°¡±îÁö ÀúÀå°¡´É
+		int maxSize =1024*1024*5;//5ï¿½Ş°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½å°¡ï¿½ï¿½
 		ServletContext context = getServletContext();
+		
 		uploadDir = context.getRealPath(save);
-			MultipartRequest multi = new MultipartRequest(request, uploadDir,maxSize,encType, new DefaultFileRenamePolicy());
-			
-		System.out.println("Àı´ë°æ·Î : "+uploadDir);
-		///////////enctype="multipart/form-data Àü¼ÛÀº request.getparameterºÒ°¡ 
+		MultipartRequest multi = new MultipartRequest(request, uploadDir,maxSize,encType, new DefaultFileRenamePolicy());
+			 System.out.println("postï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.2");	
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : "+uploadDir);
+		///////////enctype="multipart/form-data ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ request.getparameterï¿½Ò°ï¿½ 
 		
 		String p_name = multi.getParameter("p_name");
 		String p_price = multi.getParameter("p_price");
@@ -69,21 +71,20 @@ public class UploadSer extends HttpServlet {
 		pd.setP_discount(p_discount);
 		pd.setP_file(multi.getOriginalFileName("file"));
 		pd.setP_realfile(multi.getFilesystemName("file"));
-//		System.out.println("ÆÄÀÏ¸í : "+pd.getP_file());
-//		System.out.println("½ÇÁ¦ ÆÄÀÏ¸í : "+pd.getP_realfile());
+		
 		int result = ProductDAO.uploadPro(pd);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter writer = response.getWriter();
 		writer.println("<script>");
-		if(result==1) {//Á¤»ó
-			writer.println("alert('»óÇ°µî·ÏÀ» ¿Ï·áÇß½À´Ï´Ù')");
+		if(result==1) {//ì„±ê³µ
+			writer.println("alert('ìƒí’ˆë“±ë¡ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤.')");
 			writer.println("location.href='/upload/product'");
-		} else if(result==-1) {//ºñÁ¤»ó
-			writer.println("alert('»óÇ°µî·Ï¿¡ ½ÇÆĞÇß½À´Ï´Ù.')");
+		} else if(result==-1) {//ì‹¤íŒ¨
+			writer.println("alert('ìƒí’ˆë“±ë¡ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤..')");
 			writer.println("history.back()");
 		}else if(result == 0) {
-			writer.println("alert('µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù°¡ ¹ß»õÇß½À´Ï´Ù.')");
+			writer.println("alert('DBì—ëŸ¬ ë°œìƒ.')");
 			writer.println("history.back()");
 		}
 		writer.println("</script>");
