@@ -1,6 +1,6 @@
 package com.lsh.Shop.product;
 
-public class Product {
+public class ProductVO {
 	private int p_num;
 	private String p_name;
 	private String p_price;
@@ -11,11 +11,18 @@ public class Product {
 	private int p_new;
 	private int p_discount;
 	private String find;
+	private int user_pk;
 	
 	
 	
 	
 	
+	public int getUser_pk() {
+		return user_pk;
+	}
+	public void setUser_pk(int user_pk) {
+		this.user_pk = user_pk;
+	}
 	public String getFind() {
 		return find;
 	}

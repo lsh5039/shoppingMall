@@ -29,7 +29,7 @@
        <div class="headerwrap">
             <div class="left_header">
                 <p class="left_header_items"><a href="#">NOTICE</a></p>
-                <p class="left_header_items"><a href="/q&a">Q&A</a></p>
+                <p class="left_header_items"><a href="/q&a">Q/A</a></p>
                 <p class="left_header_items"><a href="#">REVIEW</a></p>
                 <p class="left_header_items"><a href="#">DELAY</a></p>
                 <p class="left_header_items"><a href="#">DELIVERY</a></p>

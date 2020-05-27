@@ -1,5 +1,6 @@
 package com.lsh.Shop.bbs;
 
+
 public class BbsVO {
 	private int bbs_pk;
 	private String title;
@@ -13,7 +14,6 @@ public class BbsVO {
 	private String r_dt;
 	private String name;
 	private int grade;
-	
 	
 	
 	

@@ -62,7 +62,7 @@ public class UploadSer extends HttpServlet {
 		
 		
 		//////////
-		Product pd = new Product();
+		ProductVO pd = new ProductVO();
 		pd.setP_name(p_name);
 		pd.setP_price(p_price);
 		pd.setP_category(p_category);

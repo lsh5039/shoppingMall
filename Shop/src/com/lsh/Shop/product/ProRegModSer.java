@@ -25,7 +25,7 @@ public class ProRegModSer extends HttpServlet {
 		String del = request.getParameter("del");
 		if(mod!=null && del==null) {//수정삭제가 아닌경우 , 그냥 디테일정보
 			int modInt = Integer.parseInt(mod);
-			Product pd = new Product();
+			ProductVO pd = new ProductVO();
 			pd.setP_num(modInt);
 			request.setAttribute("one",ProductDAO.getOne(pd));
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/ceo/proMod.jsp");
@@ -33,7 +33,7 @@ public class ProRegModSer extends HttpServlet {
 			
 		}else if(mod==null && del!=null) {//삭제시
 			int delInt = Integer.parseInt(del);
-			Product pd = new Product();
+			ProductVO pd = new ProductVO();
 			pd.setP_num(delInt);
 			int result = ProductDAO.proDel(pd);
 			String msg="삭제에 실패했습니다.";
@@ -60,7 +60,7 @@ public class ProRegModSer extends HttpServlet {
 //		System.out.println("p_new :"+ p_new);
 //		System.out.println(" p_event:"+ p_event);
 //		System.out.println(" p_discount:"+p_discount );
-		Product pd = new Product();
+		ProductVO pd = new ProductVO();
 		pd.setP_name(p_name);
 		pd.setP_price(p_price);
 		pd.setP_category(p_category);

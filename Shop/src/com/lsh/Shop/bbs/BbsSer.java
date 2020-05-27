@@ -19,8 +19,7 @@ import com.lsh.Shop.user.User;
 @WebServlet("/q&a")
 public class BbsSer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/bbs/bbs.jsp");
 //		HttpSession hs = request.getSession();
@@ -30,7 +29,8 @@ public class BbsSer extends HttpServlet {
 //			return;
 //		}
 		request.setAttribute("list", BbsDAO.getList());
-		
+		  
+			
 		
 		
 		rd.forward(request, response);

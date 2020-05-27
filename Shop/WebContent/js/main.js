@@ -1,4 +1,5 @@
   $(function(){
+	  
             $(".item_list").css("opacity",0);
             $(".item_list").stop().fadeOut();
 
@@ -77,4 +78,52 @@
                $(".btnAction").removeClass('active');
                $('html').css("overflow","");
            })
+           
+        
+  
+     
+           
+           
+           
         })//end;
+        
+  
+        $(document).on("click",".go_cart",function(){
+        	if($("#MagId").html()!="계정관리"){
+        		return;
+        	}
+        	var $go_cart = $(".go_cart").index(this);
+        	
+        	
+		  var $cart = $(".go_cart").eq($go_cart);
+	      var cartX = $cart.offset().left
+	      var cartY = $cart.offset().top
+	      console.log("cartX : "+cartX)
+	      console.log("cartY : "+cartY)
+	  
+	      
+	      var $img = $(".imgBox > img").eq($go_cart);
+	      
+	      var imgX = $img.offset().left
+	      var imgY = $img.offset().top
+	      var src = jQuery('.imgBox > img').eq($go_cart).attr("src");//img src추출
+	      console.log(src);
+	      //var newImg = "<img src='https://placehold.it/200x200' class='newImg'>";
+	      var newImg = "<img src="+src+" class='newImg'>";
+	      
+	      $("body").append(newImg)
+	      $(".newImg").css({
+	    	  left:imgX+"px",
+	    	  top:imgY+"px"
+	      })
+          $(".newImg").animate({
+              left: cartX+"px",
+              top:cartY+"px",
+              width:"0%"
+          },500,function(){//콜백으로 제거
+        	  $(".newImg").remove();
+          })
+
+	      
+	      
+  })

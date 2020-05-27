@@ -12,6 +12,7 @@ nav.active{position: fixed; top: 60px; z-index: 999; background-color: #f1f1f1; 
 .category_right_btn *{float: right; cursor: pointer;}
 .category_left_btn{width: 40px;height: 40px; cursor: pointer;}
 .category:hover{text-decoration: underline;}
+.category{font-size:12px;}
 .cart:hover .fa-cart-arrow-down{color:#abf;}
 .wish:hover .fa-heart{color:#abf;}
 .line{height: 5px; width: 30px; background: #ddd; margin: 5px 0; border-radius: 20px;}
@@ -21,6 +22,7 @@ nav.active{position: fixed; top: 60px; z-index: 999; background-color: #f1f1f1; 
 .fa-cart-arrow-down,.fa-heart{font-size: 24px; display: inline-block; margin: 10px;}
 .item_list{width: 1200px; margin: 0 auto;}
 .item .list{width: 120px;height: 30px; padding: 10px 0; background-color: #666;}
+
 .item .list a:hover{color: yellow;}
 .item {float: left; text-align: center; font-size: 12px; }
 .item > p > a{color: #fff; font-weight: lighter;}
@@ -116,3 +118,5 @@ nav.active{position: fixed; top: 60px; z-index: 999; background-color: #f1f1f1; 
 .btnActionLeftDesc{width: 100%; height: 70%; position: absolute; top: 50%; transform: translateY(-50%);}
 .btnActionLeftDesc > h3{font-size: 30px; margin-bottom: 10px;text-align: center;}
 .btnActionLeftDesc > p{font-size: 20px; margin-bottom: 50px;text-align: center;}
+.newImg{position:absolute;}
+.findItemWrap{width:600px; margin-top:50px; position:absolute; left:100px;}

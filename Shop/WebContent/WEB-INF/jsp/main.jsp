@@ -7,9 +7,10 @@
     <meta charset="UTF-8">
     <title>언더비</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+    
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="/js/main.js"></script>
 
@@ -35,7 +36,7 @@
                 <button><img src="https://placehold.it/20x20"></button>
                 <input type="text" placeholder="검색">
                 <p><a href="#">ORDER</a></p>
-                <p><a href="#">CART</a></p>
+                <p><a href="/cart/page">CART</a></p>
                 <p><a href="#">MYSHOP</a></p>
 <c:choose>
 	<c:when test="${loginUser == null}">
@@ -47,8 +48,9 @@
          <p><a href="/logoutpage">LOGOUT</a></p>
 	</c:when>
 	<c:otherwise>
-		  <p onclick ="myInfoMod('${loginUser.id}')" style="cursor:pointer">계정관리</p>
+		  <p onclick ="myInfoMod('${loginUser.id}')" style="cursor:pointer"id="MagId" >계정관리</p>
          <p><a href="/logoutpage">LOGOUT</a></p>
+         <input type="hidden" value="${loginUser.pk}" id="statePk">
 	</c:otherwise>
 </c:choose>       
             </div>
@@ -193,7 +195,7 @@
    
    
    
-   
+   <div class="findItemWrap">
    <div class ="chItemWrap">
 	<select name='chItem' onchange="chItem()" id="chItem">
 	  <!-- <option value='1' selected>상품선택</option> -->
@@ -208,11 +210,14 @@
    </div>
    
    
-   <div>
- 
-   	<input type="text" placeholder="검색" id="find" value="${find }">
-    <span><button type="button" class="btn btn-dark" onclick="findItem()">검색하기</button></span>
    
+ 
+   	<input type="text" placeholder="검색" id="find"  >
+
+    <span><button type="button" class="btn btn-dark" onclick="findItem()" id="findBtn">검색하기</button></span>
+    <span><button type="button" class="btn btn-dark" onclick="findItemReset()">초기화</button></span>
+  
+
    </div>
    
    
@@ -221,15 +226,15 @@
    
    
    
-   <div class="recommend">
-       <div class="recommend_wrap">
+   <div class="recommend" id="recommend">
+       <div class="recommend_wrap" id="recommend_wrap">
        <c:forEach var="item" items="${list}">
                 <div class="recommend_item">
                 	<div class="imgBox">
                 	<img src="/upload/${item.p_file}"/>
                 	</div>
 				<div class="state">
-				<%-- <c:choose> --%>
+				
 				<c:if test = "${item.p_event == 1}" >
 					<div class="event active">이벤트</div>
 				</c:if>
@@ -239,16 +244,13 @@
 				<c:if test = "${item.p_discount == 1}" >
 					<div class="dis active">할인</div>
 				</c:if>
-				<%-- </c:choose> --%>
-                   <!-- 
-                   <div class="new active">new</div>
-                   <div class="dis active">할인</div> -->
+				
                </div>
                <div class="desc">
                    <h2 class="item_name active">상품명 : ${item.p_name} </h2>
                    <p class="price">가격 : ${item.p_price}</p>
                    <div class="action">
-                       <div class="go_cart">장바구니</div>
+                       <div class="go_cart" onclick="goCart(${item.p_num},${loginUser.pk} )">장바구니</div>
                        <div class="go_buy">구매하기</div>
                    </div>
                </div>
@@ -258,6 +260,9 @@
        </div>
        
    </div>
+   <table id="table">
+   
+   </table>
    
    <div class="move">
     <div class="top">
@@ -313,25 +318,22 @@
         <!-- <img src="/upload/회원정보변경.PNG"/> -->
         
    <script>
+	
+   var loginUserPk = document.getElementById("statePk");
+   if(loginUserPk == null){
+	  var newEle = document.createElement("input")
+	  newEle.id = "statePk"
+	  newEle.value = "-1";
+	  newEle.type="hidden";
+	  document.body.appendChild(newEle);
+	  console.log(newEle)
+   } 
    
+	 
 
    var val = document.querySelector("#chItem");
   
 
-  
-   
-
-   /* 
-   if(ch.value=="all"){
-	   val[0].selected =true;
-   }else if(ch.value=="event"){
-	   val[1].selected =true;
-   } else if(ch.value=="new"){
-	   val[2].selected =true;
-   } else if(ch.value=="dis"){
-	   val[3].selected =true;
-   } */
-   
    
    function myInfoMod(id){
 	   location.href='/myinfo/mod/page?id='+id;
@@ -372,17 +374,100 @@
 	     
    }
    
+   var request = new XMLHttpRequest();
   function findItem(){
 	  var find = document.querySelector("#find");
-	
-	  if(find.value==""){
-		  return;
-	  }
-	  
-	  location.href="/index?find="+find.value;
+	  request.open("Post","./index?find="+encodeURIComponent(find.value),true);
+	  request.onreadystatechange = searchProcess;
+	  request.send(null);
   }
+  function searchProcess(){
+	  var recommend_wrap = document.getElementById("recommend_wrap");
+	  
+	  recommend_wrap.innerHTML = "";
+	  if(request.readyState = 4 && request.status == 200){//성공적인 통신이라면
+		  
+		  var object = eval('(' + request.responseText + ')');
+		  
+	  	  var result = object.result;
+	  	  console.log(result)
+	  	  console.log(result[0].p_file)
+	  	  ////////////////////////
+	  	 var findItem = "";
+	  	 var outResult="";
+	  
+	  	  for(var i=0; i<result.length; i++){
+	  		 
+	  	  
+	  	  findItem = 
+	  		  '<div class="recommend_item">'+
+			  	'<div class="imgBox">'+
+					'<img src="/upload/'+result[i].p_file+'">'+				 
+			  	'</div>'+//imgBox
+			  		'<div class="state">'+
+			  			'<div class="event">이벤트</div>'+
+			  			'<div class="new">신상품</div>'+
+			  			'<div class="dis">할인</div>'+
+			  		'</div>'+//state
+			  	'<div class="desc">'+
+			  	'<h2 class="item_name active">상품명 : '+result[i].p_name+'</h2>'+
+			  	'<p class="price">가격 : '+result[i].p_price+'</p>'+
+			  	'<div class="action">'+
+			  	'<div class="go_cart" onclick="goCart('+result[i].p_num+','+statePk.value+')">장바구니</div>'+
+			  	'<div class="go_buy" onclick="goBuy('+result[i].p_num+')">구매하기</div>'+
+			  	'</div>'+//action
+			  	'</div>'+//desc
+	  		  '</div>';//recommend_item
+		  	if(result[i].p_new == 1){
+	  			findItem = findItem.replace("new","new active");
+	  		}
+	  		if(result[i].p_discount == 1){
+	  			findItem = findItem.replace("dis","dis active");
+	  		}
+	  		if(result[i].p_event == 1){
+	  			findItem = findItem.replace("event","event active");
+	  		}
+	  		outResult+=findItem
+	  		  
+	  		recommend_wrap.innerHTML=outResult;
+	  		
+	  	
    
-   
+	  	  }
+  	 }
+  }
+  function findItemReset(){
+	  
+	 var find = document.getElementById('find');
+	  find.value = "";
+	  findBtn.click();
+	  
+	  
+  }
+  
+/*   function goCart(p_num){//장바구니 
+
+	location.href="/cart/page?p_num="+p_num;
+	  
+  } */
+ 
+  function goCart(p_num,pk){
+	  
+	  
+	  var requestCart = new XMLHttpRequest();
+	  
+	  if(pk == null || pk==-1){
+		  alert('로그인 후 이용가능합니다.')
+		  return;
+	  } 
+	  requestCart.open("Post","./cart/page?p_num="+encodeURIComponent(p_num),true);
+	  //request.onreadystatechange = searchProcess;
+	  requestCart.send(null);
+	  
+	  
+  }
+  
+
    
    
    </script>

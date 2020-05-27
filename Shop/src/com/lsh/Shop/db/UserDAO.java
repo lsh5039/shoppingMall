@@ -60,7 +60,7 @@ public class UserDAO {
 				user.setGrade(rs.getInt("grade"));
 				user.setPk(rs.getInt("pk"));
 			}else {
-				user.setId(null);//id�� �ߺ������ʴ°��
+				user.setId(null);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

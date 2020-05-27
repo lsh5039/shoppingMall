@@ -7,12 +7,74 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lsh.Shop.product.Product;
+import com.lsh.Shop.product.CartVO;
+import com.lsh.Shop.product.ProductVO;
+import com.lsh.Shop.user.User;
 
 public class ProductDAO {
-	public static Product getOne(Product param) {
+	
+	public static List<CartVO> getCartList(User user){
+		List<CartVO> list = new ArrayList<CartVO>();
 		
-		Product pd = new Product();
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = " select A.pk,A.name,A.grade,A.have_money, B.cart_pk,C.* "
+				+" from user A "
+				+" inner join cart B "
+				+" on A.pk = ? "//B.user_pk
+				+" inner join product C "
+				+" on C.p_num = B.p_num ";
+		try {
+			con = Conn.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, user.getPk());
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				CartVO vo = new CartVO();
+				vo.setPk(rs.getInt("pk"));
+				vo.setName(rs.getString("name"));
+				vo.setGrade(rs.getShort("grade"));
+				vo.setHaveMoney(rs.getInt("have_money"));
+				vo.setCart_pk(rs.getInt("cart_pk"));
+				vo.setP_num(rs.getInt("p_num"));
+				vo.setP_name(rs.getString("p_name"));
+				vo.setImage(rs.getString("p_file"));
+				list.add(vo);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			Conn.close(con, ps, rs);
+		}
+		return list;
+	}
+	
+	
+	
+	
+	public static int doCart(ProductVO param) {
+		int result = 0;
+		Connection con=null;
+		PreparedStatement ps = null;
+		String sql = "insert into cart(user_pk, p_num) values (?,?) ";
+		try {
+			con = Conn.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, param.getUser_pk());
+			ps.setInt(2, param.getP_num());
+			result = ps.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			Conn.close(con, ps, null);
+		}
+		return result;
+	}
+	
+	
+	public static ProductVO getOne(ProductVO param) {		
+		ProductVO pd = new ProductVO();
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -43,20 +105,13 @@ public class ProductDAO {
 		return pd;
 	}
 	
-	public static List<Product> getList(Product param){
-		List<Product> list = new ArrayList<Product>();
+	public static List<ProductVO> getList(ProductVO param){
+		List<ProductVO> list = new ArrayList<ProductVO>();
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = " select * from Product ";
 		
-		if(param.getP_new()==1) {//카테고리 분류
-			sql+=" where p_new = 1" ;
-		} else if(param.getP_event()==1) {
-			sql+=" where p_event = 1 ";
-		} else if(param.getP_discount()==1) {
-			sql+=" where p_discount = 1 ";
-		}
 		
 		if(param.getFind() != null) {//검색
 			sql+="where p_name like '%"+param.getFind()+"%' ";
@@ -69,7 +124,7 @@ public class ProductDAO {
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				Product pd = new Product();
+				ProductVO pd = new ProductVO();
 				pd.setP_num(rs.getInt("p_num"));
 				pd.setP_name(rs.getString("p_name"));
 				pd.setP_price(rs.getString("p_price"));
@@ -94,8 +149,8 @@ public class ProductDAO {
 	
 	
 	
-	public static List<Product> getList(){
-		List<Product> list = new ArrayList<Product>();
+	public static List<ProductVO> getList(){
+		List<ProductVO> list = new ArrayList<ProductVO>();
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -106,7 +161,7 @@ public class ProductDAO {
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				Product pd = new Product();
+				ProductVO pd = new ProductVO();
 				pd.setP_num(rs.getInt("p_num"));
 				pd.setP_name(rs.getString("p_name"));
 				pd.setP_price(rs.getString("p_price"));
@@ -128,7 +183,7 @@ public class ProductDAO {
 	}
 	
 	
-	public static int uploadPro(Product pd) {
+	public static int uploadPro(ProductVO pd) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = "insert into product (p_name, p_price, p_category, p_new, p_event, p_discount, p_file, p_realfile) values(?,?,?,?,?,?,?,?)";
@@ -157,7 +212,7 @@ public class ProductDAO {
 		return result;
 	}
 	
-	public static int proDel(Product param) {
+	public static int proDel(ProductVO param) {
 		int result = 0;
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -176,7 +231,7 @@ public class ProductDAO {
 		return result;
 	}
 	
-	public static int proMod(Product param) {//��ǰ����
+	public static int proMod(ProductVO param) {//��ǰ����
 		int result=0;
 		Connection con = null;
 		PreparedStatement ps = null;
